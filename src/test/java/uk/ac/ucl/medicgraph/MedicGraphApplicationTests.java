@@ -24,14 +24,14 @@ class MedicGraphApplicationTests {
 
 	@Test
 	public void testGlobalProps(){
-		assertEquals("localhost:5001", dataUrl);
+		assertEquals("http://localhost:5000", dataUrl);
 
-		assertEquals("localhost:5001", dataSourceConfig.getDataUrl());
+		assertEquals("http://localhost:5000", dataSourceConfig.getDataUrl());
 	}
 
 	@Test
 	public void testApiRoot(){
-		assertEquals("localhost:5001/api/", dataSourceConfig.getDataUrl()+ BaseUrlConfig.root);
+		assertEquals("http://localhost:8080/api/", "http://localhost:8080" + BaseUrlConfig.root);
 	}
 
 }
