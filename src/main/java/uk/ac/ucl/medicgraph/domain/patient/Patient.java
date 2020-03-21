@@ -21,19 +21,19 @@ public class Patient {
     private String id;
     @SerializedName(value = "extension")
     private List<Extension> extensions;
-    @SerializedName(value = "identifier")
-    private List<Identifier> identifiers;
-    @SerializedName(value = "name")
-    private List<Name> names;
-    @SerializedName(value = "telecom")
-    private List<Telecom> telecoms;
-    private String gender;
-    private String birthDate;
-    @SerializedName(value = "address")
-    private List<Address> addresses;
-    private MaritalStatus maritalStatus;
-    @SerializedName(value = "communication")
-    private List<Communication> communications;
+//    @SerializedName(value = "identifier")
+//    private List<Identifier> identifiers;
+//    @SerializedName(value = "name")
+//    private List<Name> names;
+//    @SerializedName(value = "telecom")
+//    private List<Telecom> telecoms;
+//    private String gender;
+//    private String birthDate;
+//    @SerializedName(value = "address")
+//    private List<Address> addresses;
+//    private MaritalStatus maritalStatus;
+//    @SerializedName(value = "communication")
+//    private List<Communication> communications;
 
 
 }
