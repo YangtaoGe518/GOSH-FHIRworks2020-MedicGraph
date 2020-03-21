@@ -31,9 +31,9 @@ public class Patient {
     private String birthDate;
     @SerializedName(value = "address")
     private List<Address> addresses;
-//    private MaritalStatus maritalStatus;
-//    @SerializedName(value = "communication")
-//    private List<Communication> communications;
+    private MaritalStatus maritalStatus;
+    @SerializedName(value = "communication")
+    private List<Communication> communications;
 
 
 }
