@@ -15,8 +15,8 @@ import uk.ac.ucl.medicgraph.domain.patient.telecom.Telecom;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Patient {
     private String id;
     @SerializedName(value = "extension")
