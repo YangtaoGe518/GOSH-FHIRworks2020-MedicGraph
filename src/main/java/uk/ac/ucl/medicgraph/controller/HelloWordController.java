@@ -10,11 +10,11 @@ import uk.ac.ucl.medicgraph.domain.Hello;
 
 @RestController
 @RequestMapping(value = "/hello")
-@Api(value ="Hello World Controller", tags={"Hello World Controller"})
+@Api(value = "Hello World Controller", tags = {"Hello World Controller"})
 public class HelloWordController {
 
     @GetMapping("/{name}")
-    @ApiOperation(value = "Test path variable api document")
+    @ApiOperation(value = "Test path variable")
     public Hello sayHelloTo(@PathVariable("name") String name){
         Hello hello = new Hello(name, ", Nice to meet you");
         return hello;
