@@ -19,10 +19,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Patient {
     private String id;
-    @SerializedName(value = "extension")
-    private List<Extension> extensions;
-//    @SerializedName(value = "identifier")
-//    private List<Identifier> identifiers;
+//    @SerializedName(value = "extension")
+//    private List<Extension> extensions;
+    @SerializedName(value = "identifier")
+    private List<Identifier> identifiers;
 //    @SerializedName(value = "name")
 //    private List<Name> names;
 //    @SerializedName(value = "telecom")
