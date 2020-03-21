@@ -1,16 +1,15 @@
-package uk.ac.ucl.medicgraph.domain.patient;
+package uk.ac.ucl.medicgraph.domain.request.patient;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uk.ac.ucl.medicgraph.domain.patient.address.Address;
-import uk.ac.ucl.medicgraph.domain.patient.communication.Communication;
-import uk.ac.ucl.medicgraph.domain.patient.extension.Extension;
-import uk.ac.ucl.medicgraph.domain.patient.identifier.Identifier;
-import uk.ac.ucl.medicgraph.domain.patient.maritalStatus.MaritalStatus;
-import uk.ac.ucl.medicgraph.domain.patient.name.Name;
-import uk.ac.ucl.medicgraph.domain.patient.telecom.Telecom;
+import uk.ac.ucl.medicgraph.domain.request.patient.address.Address;
+import uk.ac.ucl.medicgraph.domain.request.patient.communication.Communication;
+import uk.ac.ucl.medicgraph.domain.request.patient.identifier.Identifier;
+import uk.ac.ucl.medicgraph.domain.request.patient.maritalStatus.MaritalStatus;
+import uk.ac.ucl.medicgraph.domain.request.patient.name.Name;
+import uk.ac.ucl.medicgraph.domain.request.patient.telecom.Telecom;
 
 import java.util.List;
 

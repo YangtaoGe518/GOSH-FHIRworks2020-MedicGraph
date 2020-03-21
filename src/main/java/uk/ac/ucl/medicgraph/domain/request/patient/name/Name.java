@@ -1,4 +1,4 @@
-package uk.ac.ucl.medicgraph.domain.patient.name;
+package uk.ac.ucl.medicgraph.domain.request.patient.name;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

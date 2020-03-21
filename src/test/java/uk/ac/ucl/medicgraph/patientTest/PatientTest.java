@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import uk.ac.ucl.medicgraph.config.DataSourceConfig;
-import uk.ac.ucl.medicgraph.domain.patient.Patient;
+import uk.ac.ucl.medicgraph.domain.request.patient.Patient;
 import uk.ac.ucl.medicgraph.util.HttpRequest;
 
 @SpringBootTest
@@ -25,7 +25,5 @@ public class PatientTest {
         Patient patient = gson.fromJson(json, Patient.class);
 
         System.out.println(patient);
-
-
     }
 }

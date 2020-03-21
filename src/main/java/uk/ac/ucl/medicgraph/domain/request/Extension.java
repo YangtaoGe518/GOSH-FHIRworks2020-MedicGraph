@@ -1,4 +1,4 @@
-package uk.ac.ucl.medicgraph.domain.patient;
+package uk.ac.ucl.medicgraph.domain.request;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;

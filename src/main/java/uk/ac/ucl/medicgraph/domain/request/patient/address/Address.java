@@ -1,9 +1,8 @@
-package uk.ac.ucl.medicgraph.domain.patient.address;
+package uk.ac.ucl.medicgraph.domain.request.patient.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uk.ac.ucl.medicgraph.domain.patient.Extension;
 
 import java.util.List;
 
