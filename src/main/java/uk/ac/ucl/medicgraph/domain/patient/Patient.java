@@ -25,8 +25,8 @@ public class Patient {
     private List<Identifier> identifiers;
     @SerializedName(value = "name")
     private List<Name> names;
-//    @SerializedName(value = "telecom")
-//    private List<Telecom> telecoms;
+    @SerializedName(value = "telecom")
+    private List<Telecom> telecoms;
 //    private String gender;
 //    private String birthDate;
 //    @SerializedName(value = "address")
