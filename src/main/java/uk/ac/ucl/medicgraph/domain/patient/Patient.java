@@ -15,8 +15,8 @@ import uk.ac.ucl.medicgraph.domain.patient.telecom.Telecom;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Patient {
     private String id;
 //    @SerializedName(value = "extension")
@@ -27,10 +27,10 @@ public class Patient {
     private List<Name> names;
     @SerializedName(value = "telecom")
     private List<Telecom> telecoms;
-//    private String gender;
-//    private String birthDate;
-//    @SerializedName(value = "address")
-//    private List<Address> addresses;
+    private String gender;
+    private String birthDate;
+    @SerializedName(value = "address")
+    private List<Address> addresses;
 //    private MaritalStatus maritalStatus;
 //    @SerializedName(value = "communication")
 //    private List<Communication> communications;

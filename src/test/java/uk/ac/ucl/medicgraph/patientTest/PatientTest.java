@@ -24,7 +24,7 @@ public class PatientTest {
 
         Patient patient = gson.fromJson(json, Patient.class);
 
-        System.out.println(patient);
+        System.out.println(patient.getAddresses());
 
 
     }
