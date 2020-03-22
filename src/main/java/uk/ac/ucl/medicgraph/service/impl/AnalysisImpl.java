@@ -8,6 +8,9 @@ import uk.ac.ucl.medicgraph.config.DataSourceConfig;
 import uk.ac.ucl.medicgraph.domain.request.listView.EntryWrap;
 import uk.ac.ucl.medicgraph.domain.request.listView.ListView;
 import uk.ac.ucl.medicgraph.domain.request.patient.Patient;
+import uk.ac.ucl.medicgraph.domain.request.patient.address.Address;
+import uk.ac.ucl.medicgraph.domain.response.analysis.addressAnalysis.AddressAnalysis;
+import uk.ac.ucl.medicgraph.domain.response.analysis.addressAnalysis.AddressItem;
 import uk.ac.ucl.medicgraph.domain.response.analysis.ageAnalysis.AgeAnalysis;
 import uk.ac.ucl.medicgraph.domain.response.analysis.SexAnalysis;
 import uk.ac.ucl.medicgraph.domain.response.analysis.ageAnalysis.AgeItem;
@@ -145,5 +148,50 @@ public class AnalysisImpl implements AnalysisService {
         }
 
         return new SexAnalysis(total, female, male);
+    }
+
+    @Override
+    public AddressAnalysis generateCountryAnalysis() throws Exception {
+        String url = dataSourceConfig.getDataUrl() + "/api/Patient/";
+
+        Type patientListType = new TypeToken<List<ListView<Patient>>>(){}.getType();
+
+        String json = HttpRequest.requestJson(url);
+        Gson gson = new Gson();
+
+        List<ListView<Patient>> patientListViews = gson.fromJson(json, patientListType);
+
+        Map<String, Integer> addressMap = new HashMap<>();
+
+
+        for(ListView<Patient> listView: patientListViews) {
+            List<EntryWrap<Patient>> entries = listView.getEntry();
+
+            for (EntryWrap<Patient> entry : entries) {
+                List<Address> addresses = entry.getResource().getAddresses();
+//
+                if (addresses == null) continue;
+//
+                for(Address address : addresses){
+                    String country = address.getCountry();
+//
+                    if(!addressMap.containsKey(country)){
+                        addressMap.put(country, 1);
+                    }else {
+                        addressMap.put(country, addressMap.get(country) + 1);
+                    }
+                }
+//
+            }
+        }
+
+        List<AddressItem> addresses = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry: addressMap.entrySet()){
+            AddressItem item = new AddressItem(entry.getKey(), entry.getValue());
+
+            addresses.add(item);
+        }
+
+        return new AddressAnalysis(addresses);
     }
 }

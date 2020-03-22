@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uk.ac.ucl.medicgraph.domain.response.analysis.addressAnalysis.AddressAnalysis;
 import uk.ac.ucl.medicgraph.domain.response.analysis.ageAnalysis.AgeAnalysis;
 import uk.ac.ucl.medicgraph.domain.response.analysis.SexAnalysis;
 import uk.ac.ucl.medicgraph.service.AnalysisService;
@@ -24,6 +25,11 @@ public class AnalysisController {
     @GetMapping("/patients/sex")
     public SexAnalysis getSexAnalysis() throws Exception{
         return analysisService.generateSexAnalysis();
+    }
+
+    @GetMapping("/patients/country")
+    public AddressAnalysis getCountryAnalysis() throws Exception{
+        return analysisService.generateCountryAnalysis();
     }
 
 }
