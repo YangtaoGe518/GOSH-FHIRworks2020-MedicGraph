@@ -1,4 +1,4 @@
-package uk.ac.ucl.medicgraph.patientTest;
+package uk.ac.ucl.medicgraph.requestTest;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -11,7 +11,6 @@ import uk.ac.ucl.medicgraph.domain.request.patient.Patient;
 import uk.ac.ucl.medicgraph.util.HttpRequest;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest

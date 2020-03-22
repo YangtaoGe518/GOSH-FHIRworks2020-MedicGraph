@@ -1,4 +1,4 @@
-package uk.ac.ucl.medicgraph.patientTest;
+package uk.ac.ucl.medicgraph.requestTest;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import uk.ac.ucl.medicgraph.config.DataSourceConfig;
 import uk.ac.ucl.medicgraph.domain.request.listView.ListView;
 import uk.ac.ucl.medicgraph.domain.request.observation.Observation;
-import uk.ac.ucl.medicgraph.domain.request.observation.Subject;
-import uk.ac.ucl.medicgraph.domain.request.patient.Patient;
 import uk.ac.ucl.medicgraph.util.HttpRequest;
 
 import java.lang.reflect.Type;
