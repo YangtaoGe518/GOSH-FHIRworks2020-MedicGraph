@@ -75,12 +75,12 @@ public class AnalysisImpl implements AnalysisService {
             sb.append(min);
             sb.append(" to ");
             sb.append(max);
-            String intevalStr = sb.toString();
+            String intervalSir = sb.toString();
 
 
             AgeItem item;
             if(max <= 90){
-                item = new AgeItem(intevalStr, age);
+                item = new AgeItem(intervalSir, age);
             }else{
                 item = new AgeItem("90 Above", age);
             }
