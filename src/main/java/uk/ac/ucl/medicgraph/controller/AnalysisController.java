@@ -35,13 +35,16 @@ public class AnalysisController {
     }
 
     @GetMapping("/observation/{pid}")
-    public ObservationAnalysis getAllObservationAnalysis(@PathVariable("pid") String id) throws Exception {
+    public ObservationAnalysis getAllObservationAnalysis(
+            @PathVariable("pid") String id) throws Exception {
         return analysisService.generateAllObservationAnalysis(id);
     }
 
-//    @GetMapping("/observation/{pid}/{indicator-id}")
-//    public ObservationAnalysis getSingleObservationAnalysis(@PathVariable("pid") String id, @PathVariable("indicator-id") String indicatorId){
-//
-//    }
+    @GetMapping("/observation/{pid}/{indicator-id}")
+    public ObservationAnalysis getSingleObservationAnalysis(
+            @PathVariable("pid") String pId,
+            @PathVariable("indicator-id") String indicatorId) throws Exception{
+        return analysisService.generateSingleObservationAnalysis(pId, indicatorId);
+    }
 
 }

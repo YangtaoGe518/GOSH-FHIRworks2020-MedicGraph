@@ -10,5 +10,6 @@ public interface AnalysisService {
     public SexAnalysis generateSexAnalysis() throws Exception;
     public AddressAnalysis generateCountryAnalysis() throws Exception;
     public ObservationAnalysis generateAllObservationAnalysis(String id) throws Exception;
+    public ObservationAnalysis generateSingleObservationAnalysis(String pId, String indicatorId) throws Exception;
 }
 

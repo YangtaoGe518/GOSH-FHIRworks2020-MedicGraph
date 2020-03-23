@@ -244,4 +244,63 @@ public class AnalysisImpl implements AnalysisService {
 
         return new ObservationAnalysis(indicatorList.size(), indicatorList);
     }
+
+    @Override
+    public ObservationAnalysis generateSingleObservationAnalysis(String pId, String indicatorId) throws Exception {
+        String code = indicatorId;
+
+        String url = dataSourceConfig.getDataUrl() + "/api/Observation/" + pId;
+
+        Type observationType = new TypeToken<List<ListView<Observation>>>(){}.getType();
+
+        String json = HttpRequest.requestJson(url);
+        Gson gson = new Gson();
+
+        List<ListView<Observation>> observationListViews = gson.fromJson(json, observationType);
+
+        List<IndicatorItem> indicatorList = new ArrayList<>();
+
+        for(ListView<Observation> listView : observationListViews) {
+            List<EntryWrap<Observation>> entries = listView.getEntry();
+
+            for (EntryWrap<Observation> entry : entries) {
+                Observation observation = entry.getResource();
+
+                // check component
+                if(observation.getComponents() == null){
+                    String obCode = observation.getCode().getCoding().get(0).getCode();
+
+                    if(obCode.equals(code)){
+                        String issuedTime = observation.getIssued();
+                        String indicator = observation.getCode().getText();
+                        Double value = observation.getValueQuantity().getValue();
+                        String unit = observation.getValueQuantity().getUnit();
+
+                        IndicatorItem indicatorItem = new IndicatorItem(indicator, issuedTime, value, unit);
+                        indicatorList.add(indicatorItem);
+                    }
+                } else {
+                    // not null, inspect component content
+                    List<Component> components = observation.getComponents();
+                    for(Component component : components){
+                        String obCode = component.getCode().getCoding().get(0).getCode();
+
+                        if(obCode.equals(code)){
+                            String issuedTime = observation.getIssued();
+                            String indicator = component.getCode().getText();
+                            Double value = component.getValueQuantity().getValue();
+                            String unit = component.getValueQuantity().getUnit();
+
+                            IndicatorItem indicatorItem = new IndicatorItem(indicator, issuedTime, value, unit);
+                            indicatorList.add(indicatorItem);
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        return new ObservationAnalysis(indicatorList.size(), indicatorList);
+    }
 }
