@@ -7,7 +7,7 @@ This file explains the problem statement, proposed solution and all the other de
 bundle of MedicGraph API.
 
 ## Problem Statement
-My topic is **Graphing data from FHIR records** in different analysis perspectives
+My topic is **Graphing data from FHIR records** in different analysis perspectives and generate CSV and XML data.
 
 In the modern society, medical assistance and medical services are highly demanded since the expansion of amount of population 
 and growing value of average life time. However, the number of medical staff and qualified doctors do not match the pace 
