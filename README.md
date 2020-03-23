@@ -58,3 +58,7 @@ mvn clean package
 mvn spring-boot:run
 ```
 
+## Release
+Here is the release:
+* Final: https://github.com/YangtaoGe518/GOSH-FHIRworks2020-MedicGraph/releases/tag/final
+
