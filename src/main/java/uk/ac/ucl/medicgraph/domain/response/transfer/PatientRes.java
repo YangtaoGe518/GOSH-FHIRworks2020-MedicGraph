@@ -10,11 +10,11 @@ import uk.ac.ucl.medicgraph.domain.response.analysis.observationAnalysis.Indicat
 import uk.ac.ucl.medicgraph.domain.response.transfer.identifier.IdentifierRes;
 import uk.ac.ucl.medicgraph.domain.response.transfer.telecom.TelecomRes;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@XmlRootElement(name = "patient")
 public class PatientRes {
     String id;
     List<IdentifierRes> identifiers;
@@ -27,4 +27,20 @@ public class PatientRes {
     List<String> communications;
 
     List<IndicatorItem> indicators;   // from observation
+
+    public PatientRes(String id, List<IdentifierRes> identifiers, List<Name> names, List<TelecomRes> telecoms, String gender, String birthDate, List<Address> addresses, String maritalStatus, List<String> communications, List<IndicatorItem> indicators) {
+        this.id = id;
+        this.identifiers = identifiers;
+        this.names = names;
+        this.telecoms = telecoms;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.addresses = addresses;
+        this.maritalStatus = maritalStatus;
+        this.communications = communications;
+        this.indicators = indicators;
+    }
+
+    public PatientRes() {
+    }
 }
