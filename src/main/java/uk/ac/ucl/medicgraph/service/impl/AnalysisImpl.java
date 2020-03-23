@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import uk.ac.ucl.medicgraph.config.DataSourceConfig;
 import uk.ac.ucl.medicgraph.domain.request.listView.EntryWrap;
 import uk.ac.ucl.medicgraph.domain.request.listView.ListView;
+import uk.ac.ucl.medicgraph.domain.request.observation.Component;
+import uk.ac.ucl.medicgraph.domain.request.observation.Observation;
 import uk.ac.ucl.medicgraph.domain.request.patient.Patient;
 import uk.ac.ucl.medicgraph.domain.request.patient.address.Address;
 import uk.ac.ucl.medicgraph.domain.response.analysis.addressAnalysis.AddressAnalysis;
@@ -14,6 +16,8 @@ import uk.ac.ucl.medicgraph.domain.response.analysis.addressAnalysis.AddressItem
 import uk.ac.ucl.medicgraph.domain.response.analysis.ageAnalysis.AgeAnalysis;
 import uk.ac.ucl.medicgraph.domain.response.analysis.SexAnalysis;
 import uk.ac.ucl.medicgraph.domain.response.analysis.ageAnalysis.AgeItem;
+import uk.ac.ucl.medicgraph.domain.response.analysis.observationAnalysis.IndicatorItem;
+import uk.ac.ucl.medicgraph.domain.response.analysis.observationAnalysis.ObservationAnalysis;
 import uk.ac.ucl.medicgraph.service.AnalysisService;
 import uk.ac.ucl.medicgraph.util.HttpRequest;
 
@@ -193,5 +197,51 @@ public class AnalysisImpl implements AnalysisService {
         }
 
         return new AddressAnalysis(addresses);
+    }
+
+    @Override
+    public ObservationAnalysis generateAllObservationAnalysis(String id) throws Exception {
+        String url = dataSourceConfig.getDataUrl() + "/api/Observation/" + id;
+
+        Type observationType = new TypeToken<List<ListView<Observation>>>(){}.getType();
+
+        String json = HttpRequest.requestJson(url);
+        Gson gson = new Gson();
+
+        List<ListView<Observation>> observationListViews = gson.fromJson(json, observationType);
+
+        List<IndicatorItem> indicatorList = new ArrayList<>();
+
+        for(ListView<Observation> listView : observationListViews){
+            List<EntryWrap<Observation>> entries = listView.getEntry();
+
+            for(EntryWrap<Observation> entry : entries){
+                Observation observation = entry.getResource();
+
+                String issuedTime = observation.getIssued();
+
+                List<Component> components = observation.getComponents();
+                if (observation.getValueQuantity() != null){
+                    String indicator = observation.getCode().getText();
+                    Double value = observation.getValueQuantity().getValue();
+                    String unit = observation.getValueQuantity().getUnit();
+
+                    IndicatorItem indicatorItem = new IndicatorItem(indicator, issuedTime, value, unit);
+                    indicatorList.add(indicatorItem);
+                } else if (components != null) {
+                    for(Component component : components){
+                        String indicator = component.getCode().getText();
+                        Double value = component.getValueQuantity().getValue();
+                        String unit = component.getValueQuantity().getUnit();
+
+                        IndicatorItem indicatorItem = new IndicatorItem(indicator, issuedTime, value, unit);
+                        indicatorList.add(indicatorItem);
+                    }
+                }
+
+            }
+        }
+
+        return new ObservationAnalysis(indicatorList.size(), indicatorList);
     }
 }
