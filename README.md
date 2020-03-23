@@ -1,5 +1,8 @@
 # GOSH-FHIRworks2020-MedicGraph
 
+> A Java Spring API package for analyzing, graph, and data transform to CSV or XML
+
+
 This file explains the problem statement, proposed solution and all the other detail required to familiarise with the
 bundle of MedicGraph API.
 
@@ -27,6 +30,7 @@ This API bundle has these following key features:
     * Analysis of the average age with percentage for specific health condition
     * Analysis of the location of patients on the map
     * Analysis of the medical condition of one patient within a time period
+    * Generate patient data in CSV and XML format
 * Other Features: 
     * Interactive API document by Swagger for developers to operate
     * Easy to change the data sources for all data implemented in FHIR standard
