@@ -1,5 +1,6 @@
 package uk.ac.ucl.medicgraph.domain.request.observation;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,5 +20,7 @@ public class Observation {
     private String effectiveDateTime;
     private String issued;
     private ValueQuantity valueQuantity;
+    @SerializedName(value = "component")
+    private List<Component> components;
 
 }
