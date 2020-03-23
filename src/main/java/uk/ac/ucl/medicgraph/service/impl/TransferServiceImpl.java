@@ -91,6 +91,11 @@ public class TransferServiceImpl implements TransferService {
         return sb.toString();
     }
 
+    @Override
+    public String generateMultiCsvPatientInfo() throws Exception {
+        return "temporary unsupported";
+    }
+
     private PatientRes generateSinglePatient(Patient patient, List<ListView<Observation>> observationListViews){
         // id
         String id = patient.getId();
