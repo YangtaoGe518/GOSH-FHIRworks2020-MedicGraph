@@ -37,8 +37,8 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public String generateXmlPatientInfo(String pId) throws Exception{
-        String patientUrl = dataSourceConfig.getDataUrl() + "/api/Patient/b905139e-1601-403c-9d85-f8e3997cdd19";
-        String observationUrl = dataSourceConfig.getDataUrl() + "/api/Observation/b905139e-1601-403c-9d85-f8e3997cdd19";
+        String patientUrl = dataSourceConfig.getDataUrl() + "/api/Patient/" + pId;
+        String observationUrl = dataSourceConfig.getDataUrl() + "/api/Observation/" + pId;
 
         String patientJson = HttpRequest.requestJson(patientUrl);
         String observationJson = HttpRequest.requestJson(observationUrl);
@@ -49,6 +49,14 @@ public class TransferServiceImpl implements TransferService {
         Type observationType = new TypeToken<List<ListView<Observation>>>(){}.getType();
         List<ListView<Observation>> observationListViews = gson.fromJson(observationJson, observationType);
 
+        PatientRes patientInfo = generateSinglePatient(patient, observationListViews);
+
+        String res = poJoToXml(patientInfo);
+
+        return res;
+    }
+
+    private PatientRes generateSinglePatient(Patient patient, List<ListView<Observation>> observationListViews){
         // id
         String id = patient.getId();
         // identifiers
@@ -135,9 +143,7 @@ public class TransferServiceImpl implements TransferService {
                 indicatorList
         );
 
-        String res = poJoToXml(patientInfo);
-
-        return res;
+        return patientInfo;
     }
 
     private String poJoToXml(PatientRes patient) throws Exception{
@@ -151,4 +157,7 @@ public class TransferServiceImpl implements TransferService {
 
         return xmlContent;
     }
+
+
+
 }
