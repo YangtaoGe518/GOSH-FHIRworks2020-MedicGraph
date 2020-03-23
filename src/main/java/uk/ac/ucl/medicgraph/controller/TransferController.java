@@ -1,6 +1,5 @@
 package uk.ac.ucl.medicgraph.controller;
 
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +14,13 @@ public class TransferController {
     private TransferService transferService;
 
     @GetMapping("/xml/{pid}")
-    public String getPatientInfoInXml(@PathVariable("pid") String pId) throws Exception{
-        return transferService.generateXmlPatientInfo(pId);
+    public String getSinglePatientInfoInXml(@PathVariable("pid") String pId) throws Exception{
+        return transferService.generateSingleXmlPatientInfo(pId);
+    }
+
+    @GetMapping("/xml")
+    public String getAllPatientInfoInXml() throws Exception{
+        return transferService.generateMultiXmlPatientInfo();
     }
 
 }

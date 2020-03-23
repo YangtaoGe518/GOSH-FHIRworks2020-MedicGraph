@@ -1,5 +1,6 @@
 package uk.ac.ucl.medicgraph.service;
 
 public interface TransferService {
-    public String generateXmlPatientInfo(String pId) throws Exception;
+    public String generateSingleXmlPatientInfo(String pId) throws Exception;
+    public String generateMultiXmlPatientInfo() throws Exception;
 }

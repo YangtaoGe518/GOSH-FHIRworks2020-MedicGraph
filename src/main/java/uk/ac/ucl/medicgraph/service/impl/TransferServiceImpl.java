@@ -36,7 +36,7 @@ public class TransferServiceImpl implements TransferService {
     DataSourceConfig dataSourceConfig;
 
     @Override
-    public String generateXmlPatientInfo(String pId) throws Exception{
+    public String generateSingleXmlPatientInfo(String pId) throws Exception{
         String patientUrl = dataSourceConfig.getDataUrl() + "/api/Patient/" + pId;
         String observationUrl = dataSourceConfig.getDataUrl() + "/api/Observation/" + pId;
 
@@ -54,6 +54,41 @@ public class TransferServiceImpl implements TransferService {
         String res = poJoToXml(patientInfo);
 
         return res;
+    }
+
+    @Override
+    public String generateMultiXmlPatientInfo() throws Exception {
+        String patientListUrl = dataSourceConfig.getDataUrl() + "/api/Patient/pages/1";
+
+        Type patientListType = new TypeToken<List<ListView<Patient>>>(){}.getType();
+
+        String json = HttpRequest.requestJson(patientListUrl);
+        Gson gson = new Gson();
+
+        List<ListView<Patient>> patientListViews = gson.fromJson(json, patientListType);
+
+        StringBuilder sb = new StringBuilder();
+
+        for(ListView<Patient> listView: patientListViews) {
+            List<EntryWrap<Patient>> entries = listView.getEntry();
+
+            for (EntryWrap<Patient> entry : entries) {
+                Patient patient =  entry.getResource();
+                String pId = patient.getId();
+
+                String observationUrl = dataSourceConfig.getDataUrl() + "/api/Observation/" + pId;
+                String observationJson = HttpRequest.requestJson(observationUrl);
+
+                Type observationType = new TypeToken<List<ListView<Observation>>>(){}.getType();
+                List<ListView<Observation>> observationListViews = gson.fromJson(observationJson, observationType);
+
+                PatientRes patientInfo = generateSinglePatient(patient, observationListViews);
+                String res = poJoToXml(patientInfo);
+                sb.append(res);
+            }
+        }
+
+        return sb.toString();
     }
 
     private PatientRes generateSinglePatient(Patient patient, List<ListView<Observation>> observationListViews){
